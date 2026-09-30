@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5fff">
+<link rel="manifest" href="manifest.json">
+<title>Job Agent</title>
+<style>
+ body{font-family:sans-serif;margin:0;background:#f4f6fb}
+ header{background:#0b5fff;color:#fff;padding:16px}
+ input{width:92%;margin:12px 4%;padding:10px;font-size:16px}
+ .job{background:#fff;margin:8px 4%;padding:12px;border-radius:10px}
+ a{color:#0b5fff;font-weight:bold;text-decoration:none}
+ small{color:#666}
+</style></head><body>
+<header><h2>CS Job Agent</h2><small id="updated"></small></header>
+<input id="q" placeholder="Filter (e.g. developer)">
+<div id="list">Loading...</div>
+<script>
+let jobs=[];
+fetch("jobs.json").then(r=>r.json()).then(d=>{
+  jobs=d.jobs;
+  document.getElementById("updated").textContent="Updated: "+new Date(d.updated).toLocaleString();
+  render();
+});
+function render(){
+  const q=document.getElementById("q").value.toLowerCase();
+  const html=jobs.filter(j=>j.title.toLowerCase().includes(q)).map(j=>
+    `<div class="job"><a href="${j.link}" target="_blank">${j.title}</a><br>
+     <small>${j.source} · ${j.matched.join(", ")}</small></div>`).join("");
+  document.getElementById("list").innerHTML=html||"No jobs found yet.";
+}
+document.getElementById("q").oninput=render;
+</script></body></html>

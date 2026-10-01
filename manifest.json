@@ -1,2 +1,6 @@
-{"name":"CS Job Agent","short_name":"JobAgent","start_url":"./index.html",
- "display":"standalone","background_color":"#f4f6fb","theme_color":"#0b5fff"}
+{"name":"CS Job Agent","short_name":"JobAgent","start_url":"./index.html","scope":"./",
+ "display":"standalone","background_color":"#f4f6fb","theme_color":"#0b5fff",
+ "icons":[
+  {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+  {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}
+ ]}

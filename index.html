@@ -22,6 +22,7 @@ fetch("jobs.json").then(r=>r.json()).then(d=>{
   jobs=d.jobs;
   document.getElementById("updated").textContent="Updated: "+new Date(d.updated).toLocaleString();
   render();
+ if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
 });
 function render(){
   const q=document.getElementById("q").value.toLowerCase();
